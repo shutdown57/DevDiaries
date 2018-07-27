@@ -1,0 +1,42 @@
+version: '2'  
+services:  
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    networks:
+      - default
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - '/etc/nginx/vhost.d'
+      - '/usr/share/nginx/html'
+      - './certs:/etc/nginx/certs:ro' 
+      - '/var/run/docker.sock:/tmp/docker.sock:ro'
+
+  letsencrypt-nginx-proxy:
+    container_name: letsencrypt-nginx-proxy
+    image: 'jrcs/letsencrypt-nginx-proxy-companion'
+    volumes:
+      - './certs:/etc/nginx/certs:rw'
+      - '/var/run/docker.sock:/var/run/docker.sock:ro'
+    volumes_from:
+      - nginx-proxy
+  
+  web:
+    build: ./src
+    depends_on:
+      - nginx-proxy
+    ports:
+      - "8181:5000"
+    networks:
+      - default
+    environment:
+      - 'LETSENCRYPT_EMAIL=shutdown57@riseup.net'
+      - 'LETSENCRYPT_HOST=devdiaries.ml'
+      - 'VIRTUAL_HOST=devdiaries.ml'
+
+networks:  
+  default:
+    external:
+      name: nginx-net

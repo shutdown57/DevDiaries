@@ -1,0 +1,23 @@
+FROM python:3.6-alpine
+
+RUN adduser -D app
+
+WORKDIR /home/app
+
+COPY app/requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+RUN pip install gunicorn
+
+COPY ./app app
+COPY app/app.py app/boot.sh ./
+RUN chmod +x boot.sh
+
+ENV FLASK_APP app.py
+
+RUN chown -R app:app ./
+USER app
+
+RUN ls -al
+
+EXPOSE 5000
+CMD python app/server.py
