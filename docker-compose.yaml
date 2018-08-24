@@ -1,5 +1,5 @@
-version: '2'  
-services:  
+version: '2'
+services:
   nginx-proxy:
     image: jwilder/nginx-proxy
     container_name: nginx-proxy
@@ -11,7 +11,7 @@ services:
     volumes:
       - '/etc/nginx/vhost.d'
       - '/usr/share/nginx/html'
-      - './certs:/etc/nginx/certs:ro' 
+      - './certs:/etc/nginx/certs:ro'
       - '/var/run/docker.sock:/tmp/docker.sock:ro'
 
   letsencrypt-nginx-proxy:
@@ -22,7 +22,7 @@ services:
       - '/var/run/docker.sock:/var/run/docker.sock:ro'
     volumes_from:
       - nginx-proxy
-  
+
   web:
     build: ./src
     depends_on:
@@ -36,7 +36,7 @@ services:
       - 'LETSENCRYPT_HOST=devdiaries.ml'
       - 'VIRTUAL_HOST=devdiaries.ml'
 
-networks:  
-  default:
+networks:
+git@gitlab.com:shutdown57/devdiaries.ml.git  default:
     external:
       name: nginx-net
