@@ -44,8 +44,6 @@ services:
     networks:
       - default
     environment:
-      - 'LETSENCRYPT_EMAIL=shutdown57@riseup.net'
-      - 'LETSENCRYPT_HOST=link.devdiaries.ml'
       - 'VIRTUAL_HOST=link.devdiaries.ml'
 
 networks:
