@@ -9,8 +9,7 @@ RUN pip install -r requirements.txt
 RUN pip install gunicorn
 
 COPY ./app app
-COPY app/app.py app/boot.sh ./
-RUN chmod +x boot.sh
+COPY app/app.py ./
 
 ENV FLASK_APP app.py
 
