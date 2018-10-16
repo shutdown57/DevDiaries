@@ -1,22 +1,20 @@
 FROM python:3.6-alpine
 
-RUN adduser -D app
+RUN adduser -D link
 
-WORKDIR /home/app
+WORKDIR /home/link
 
-COPY app/requirements.txt requirements.txt
+COPY link/requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 RUN pip install gunicorn
 
-COPY ./app app
-COPY app/app.py ./
+COPY ./link link
+COPY link/app.py ./
 
 ENV FLASK_APP app.py
 
-RUN chown -R app:app ./
-USER app
+RUN chown -R link:link ./
+USER link
 
-RUN ls -al
-
-EXPOSE 5001
-CMD python app/server.py
+EXPOSE 5000
+CMD python link/server.py
