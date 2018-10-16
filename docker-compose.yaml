@@ -34,7 +34,7 @@ services:
     environment:
       - 'LETSENCRYPT_EMAIL=shutdown57@riseup.net'
       - 'LETSENCRYPT_HOST=devdiaries.ml'
-      - 'VIRTUAL_HOST=devdiaries.ml'
+      - 'VIRTUAL_HOST=test.devdiaries.ml'
   link:
     build: ./link
     depends_on:
