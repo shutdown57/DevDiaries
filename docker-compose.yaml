@@ -41,9 +41,9 @@ services:
       - nginx-proxy
     ports:
       - "8182:5001"
-    # networks:
-      # - default
-    network_mode: "bridge"
+    networks:
+      - default
+    # network_mode: "bridge"
     environment:
       - 'VIRTUAL_HOST=link.devdiaries.ml'
 
