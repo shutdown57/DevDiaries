@@ -3,8 +3,9 @@ services:
   nginx-proxy:
     image: jwilder/nginx-proxy
     container_name: nginx-proxy
-    # networks:
-      # - default
+    networks:
+      - default
+      - link
     ports:
       - '80:80'
       - '443:443'
@@ -29,8 +30,8 @@ services:
       - nginx-proxy
     ports:
       - "8181:5000"
-    # networks:
-      # - default
+    networks:
+      - default
     environment:
       - 'LETSENCRYPT_EMAIL=shutdown57@riseup.net'
       - 'LETSENCRYPT_HOST=devdiaries.ml'
@@ -41,13 +42,16 @@ services:
       - nginx-proxy
     ports:
       - "8182:5001"
-    # networks:
-      # - link
+    networks:
+      - link
     environment:
       # - 'LETSENCRYPT_HOST=link.devdiaries.ml'
       - 'VIRTUAL_HOST=link.devdiaries.ml'
 
-# networks:
-  # default:
-    # external:
-      # name: nginx-net
+networks:
+  default:
+    external:
+      name: nginx-net
+  link:
+    external:
+      name: nginx-link
