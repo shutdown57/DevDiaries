@@ -28,7 +28,7 @@ services:
     depends_on:
       - nginx-proxy
     ports:
-      - "8181:5000"
+      - "8181:5001"
     networks:
       - default
     environment:
