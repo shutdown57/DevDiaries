@@ -42,8 +42,9 @@ services:
     ports:
       - "8182:5001"
     networks:
-      - default
+      - link
     environment:
+      # - 'LETSENCRYPT_HOST=link.devdiaries.ml'
       - 'VIRTUAL_HOST=link.devdiaries.ml'
 
 networks:
