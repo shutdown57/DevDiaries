@@ -24,7 +24,7 @@ services:
       - nginx-proxy
 
   web:
-    build: ./src
+    build: ./link
     depends_on:
       - nginx-proxy
     ports:
@@ -35,16 +35,16 @@ services:
       - 'LETSENCRYPT_EMAIL=shutdown57@riseup.net'
       - 'LETSENCRYPT_HOST=devdiaries.ml'
       - 'VIRTUAL_HOST=devdiaries.ml'
-  link:
-    build: ./link
-    depends_on:
-      - nginx-proxy
-    ports:
-      - "8182:5001"
-    networks:
-      - default
-    environment:
-      - 'VIRTUAL_HOST=link.devdiaries.ml'
+  # link:
+    # build: ./link
+    # depends_on:
+      # - nginx-proxy
+    # ports:
+      # - "8182:5001"
+    # networks:
+      # - default
+    # environment:
+      # - 'VIRTUAL_HOST=link.devdiaries.ml'
 
 networks:
   default:
