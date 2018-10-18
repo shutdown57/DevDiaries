@@ -14,7 +14,7 @@ services:
       - '/usr/share/nginx/html'
       - './certs:/etc/nginx/certs:ro'
       - '/var/run/docker.sock:/tmp/docker.sock:ro'
-    link:
+    links:
       - main
       - link
 
