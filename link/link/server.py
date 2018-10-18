@@ -8,8 +8,8 @@ if __name__ == '__main__':
 
     server = cherrypy._cpserver.Server()
     server.socket_host = "0.0.0.0"
-    server.socket_port = 5001
-    server.thread_pool = 20
+    server.socket_port = 5000
+    server.thread_pool = 30
 
     server.subscribe()
 

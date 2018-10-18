@@ -16,5 +16,5 @@ ENV FLASK_APP app.py
 RUN chown -R link:link ./
 USER link
 
-EXPOSE 5001
+EXPOSE 5000
 CMD python link/server.py

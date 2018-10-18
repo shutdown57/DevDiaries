@@ -14,9 +14,6 @@ services:
       - '/usr/share/nginx/html'
       - './certs:/etc/nginx/certs:ro'
       - '/var/run/docker.sock:/tmp/docker.sock:ro'
-    links:
-      - main
-      - link
 
   letsencrypt-nginx-proxy:
     container_name: letsencrypt-nginx-proxy
@@ -44,7 +41,7 @@ services:
     depends_on:
       - nginx-proxy
     ports:
-      - "8182:5001"
+      - "8182:5000"
     networks:
       - link
     environment:
