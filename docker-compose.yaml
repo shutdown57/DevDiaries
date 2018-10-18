@@ -34,7 +34,7 @@ services:
       - default
     environment:
       - 'LETSENCRYPT_EMAIL=shutdown57@riseup.net'
-      - 'LETSENCRYPT_HOST=*.devdiaries.ml'
+      - 'LETSENCRYPT_HOST=devdiaries.ml'
       - 'VIRTUAL_HOST=devdiaries.ml'
   link:
     build: ./link
@@ -45,7 +45,7 @@ services:
     networks:
       - link
     environment:
-      # - 'LETSENCRYPT_HOST=link.devdiaries.ml'
+      - 'LETSENCRYPT_HOST=link.devdiaries.ml'
       - 'VIRTUAL_HOST=link.devdiaries.ml'
 
 networks:
