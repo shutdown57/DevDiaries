@@ -45,7 +45,7 @@ services:
     networks:
       - link
     environment:
-      - 'LETSENCRYPT_HOST=link.devdiaries.ml'
+      # - 'LETSENCRYPT_HOST=link.devdiaries.ml'
       - 'VIRTUAL_HOST=link.devdiaries.ml'
 
 networks:
