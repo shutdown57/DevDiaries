@@ -1,6 +1,9 @@
-from app import app
 import cherrypy
 
+from . import create_app
+
+
+app = create_app('product')
 
 if __name__ == '__main__':
     cherrypy.tree.graft(app, "/")
