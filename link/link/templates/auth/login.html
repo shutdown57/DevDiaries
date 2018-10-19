@@ -1,0 +1,42 @@
+{% extends "layouts/layout.default.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block section %}
+<section class="section">
+    <div class="container">
+        <form action="{{ url_for('bp_auth.login_store') }}" method="POST">
+
+            <div class="field">
+                <label class="label">Email</label>
+                <div class="control">
+                    <input class="input" type="email" placeholder="example@example.com">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Password</label>
+                <div class="control">
+                    <input class="input" type="password" placeholder="********">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <label class="checkbox">
+                    <input type="checkbox">
+                    Remember Me
+                    </label>
+                </div>
+            </div>
+
+            <div class="field is-grouped">
+                <div class="control">
+                    <input class="button is-link" type="submit" value="Submit">
+                </div>
+            </div>
+
+        </form>
+    </div>
+</section>
+{% endblock %}
