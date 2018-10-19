@@ -1,6 +1,6 @@
 from flask import render_template
 
-from .server import app
+from server import app
 
 
 @app.route('/', methods=['GET'])
