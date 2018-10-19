@@ -37,7 +37,7 @@ services:
       - 'LETSENCRYPT_HOST=devdiaries.ml'
       - 'VIRTUAL_HOST=devdiaries.ml'
 
-    link:
+  link:
     build: ./link
     depends_on:
       - nginx-proxy
@@ -49,6 +49,20 @@ services:
       - 'LETSENCRYPT_EMAIL=shutdown57@riseup.net'
       - 'LETSENCRYPT_HOST=link.devdiaries.ml'
       - 'VIRTUAL_HOST=link.devdiaries.ml'
+
+  db:
+    image:
+      mariadb:latest
+    volumes:
+      - dbdata:/var/lib/mariadb
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      - 'MYSQL_ROOT_PASSWORD=root'
+      - 'MYSQL_DATABASE=diaries'
+      - 'MYSQL_USER=admin'
+      - 'MYSQL_PASSWORD=root'
 
 networks:
   default:
