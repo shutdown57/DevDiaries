@@ -1,9 +1,14 @@
 import cherrypy
+from flask_migrate import Migrate, upgrade
 
 from factory import create_app
+from common.extensions import db
 
 
 app = create_app('product')
+db.init_app(app)
+migrate = Migrate(app, db)
+upgrade()
 
 if __name__ == '__main__':
     cherrypy.tree.graft(app, "/")
