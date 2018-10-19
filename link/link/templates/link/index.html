@@ -1,0 +1,22 @@
+{% extends "layouts/layout.default.html" %}
+
+{% block title %}Link Project{% endblock %}
+
+{% block section %}
+<section class="section">
+    <div class="container">
+    <h1 class="title">
+        Links
+    </h1>
+    {% if links %}
+        <p class="subtitle">
+            {% for link in links %}
+                {{ link.name }}
+            {% endfor %}
+        </p>
+    {% else %}
+        <p class="subtitle">There is no link yet!</p>
+    {% endif%}
+    </div>
+</section>
+{% endblock %}
