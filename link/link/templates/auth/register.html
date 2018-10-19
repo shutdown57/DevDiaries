@@ -1,0 +1,50 @@
+{% extends "layouts/layout.default.html" %}
+
+{% block title %}Registration{% endblock %}
+
+{% block section %}
+<section class="section">
+    <div class="container">
+        <form action="{{ url_for('bp_auth.register_store') }}" method="POST">
+
+            <div class="field">
+                <label class="label">Email</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="example@example.com">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Password</label>
+                <div class="control">
+                    <input class="input" type="password" placeholder="********">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Confirm Password</label>
+                <div class="control">
+                    <input class="input" type="password" placeholder="********">
+                </div>
+            </div>
+
+            <!-- TODO Make a term -->
+            <!-- <div class="field"> -->
+                <!-- <div class="control"> -->
+                    <!-- <label class="checkbox"> -->
+                    <!-- <input type="checkbox"> -->
+                    <!-- I agree to the <a href="#">terms and conditions</a> -->
+                    <!-- </label> -->
+                <!-- </div> -->
+            <!-- </div> -->
+
+            <div class="field is-grouped">
+                <div class="control">
+                    <input class="button is-link" type="submit" value="Submit">
+                </div>
+            </div>
+
+        </form>
+    </div>
+</section>
+{% endblock %}
