@@ -10,7 +10,8 @@ link_tag_table = db.Table(
 
 
 class Link(db.Model):
-    """Link model
+    """
+    Link model
     Fields: id <int>,
             created_at <int>,
             updated_at <int>,
@@ -31,10 +32,10 @@ class Link(db.Model):
     created_at = db.Column(db.Integer, default=timestamp)
     updated_at = db.Column(db.Integer, default=timestamp)
 
-    name = db.Column(db.String, nullable=False, unique=True)
-    url = db.Column(db.Text, nullable=False, unique=True)
+    name = db.Column(db.String(256), nullable=False, unique=True)
+    url = db.Column(db.Text, nullable=False)
     active = db.Column(db.Boolean, default=True)
-    website_image = db.Column(db.String)
+    website_image = db.Column(db.String(256))
     description = db.Column(db.Text, nullable=False)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -43,8 +44,11 @@ class Link(db.Model):
                            secondary=link_tag_table,
                            backref=db.backref('links', lazy='dynamic'))
 
-    # TODO make a function to create link object
     def to_json(self):
+        """
+        Convert link object to dict (json like)
+        :return: dict
+        """
         return {
             'ID': self.id,
             'created_at': self.created_at,
@@ -58,18 +62,38 @@ class Link(db.Model):
         }
 
     def __repr__(self):
+        """
+        Represent link object
+        :return: str
+        """
         return '<LINK ID={id} URL={url} ACTIVE={active}>'.format(
-            id=self.id, url=self.url, active=self.active
-        )
+            id=self.id, url=self.url, active=self.active)
+
+    @classmethod
+    def create(cls, name, url, description):
+        """
+        Create link object and store in database
+        :param cls Link: Class inctanse
+        :param name str: website name
+        :param url str: website url
+        :param description str: describe website
+        :return: Link object
+        """
+        link = cls(name=name, url=url, description=description)
+        db.session.add(link)
+        db.session.commit()
+        return link
 
 
 class Tag(db.Model):
     """
+    Tag model
     Fields: id <int>,
             created_at <int>,
             updated_at <int>,
             name <str>
-    Input fields: name <str>"""
+    Input fields: name <str>
+    """
     __tablename__ = 'tag'
     __searchable__ = ['name']
 
@@ -78,9 +102,26 @@ class Tag(db.Model):
     created_at = db.Column(db.Integer, default=timestamp)
     updated_at = db.Column(db.Integer, default=timestamp)
 
-    name = db.Column(db.String, nullable=False)
+    name = db.Column(db.String(50), nullable=False)
+
+    @classmethod
+    def create(cls, name):
+        """
+        Create Tag object and store in database
+        :param cls Tag: Class inctanse
+        :param name str: Name of tag
+        :return: Tag object
+        """
+        tag = cls(name=name)
+        db.session.add(tag)
+        db.session.commit()
+        return tag
 
     def to_json(self):
+        """
+        Convert tag object to dict (json like)
+        :return: dict
+        """
         return {
             'ID': self.id,
             'name': self.name,
@@ -89,5 +130,9 @@ class Tag(db.Model):
         }
 
     def __repr__(self):
+        """
+        Represent tag object
+        :return: str
+        """
         return '<TAG ID={id} NAME={name}>'.format(
             id=self.id, name=self.name)
