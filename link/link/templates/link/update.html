@@ -1,0 +1,59 @@
+{% extends "layouts/layout.default.html" %}
+
+{% block title %}Update-Link{% endblock %}
+
+{% block section %}
+<section class"section">
+    <div class="container">
+        <h2 class="title">Update link</h2>
+        <form method="POST" action="{{ url_for('bp_link.store') }}">
+            <div class="field">
+                <label class="label">Name</label>
+                <div class="control">
+                    <input name="name" class="input is-success" type="text" value="{{ link.name }}" placeholder="duckduckgo" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">URL</label>
+                <div class="control">
+                    <input name="url" class="input is-success" type="text" value="{{  link.url }}" placeholder="www.duckduckgo.com" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Website image</label>
+                <div class="control">
+                    <input name="web_img"  class="input is-success" type="text" value="{{ link.img }}" placeholder="link/img/duckduckgo.com/duckduckgo.com.jpg.jpg">
+                </div>
+            </div>
+
+            <label class="checkbox">
+                <input name="active" type="checkbox">
+                Is url active or not
+            </label>
+
+            <div class="field">
+                <label class="label">Description</label>
+                <div class="control">
+                    <textarea name="description" class="textarea is-success" type="text" value="{{ link.description }}" placeholder="Success textarea" required></textarea>
+                </div>
+            </div>
+
+            <div class="select is-multiple">
+                <select multiple size="3">
+                    {% for tag in link.tags %}
+                    <option value="Argentina">Argentina</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="field is-grouped">
+                <div class="control">
+                    <input type="submit" class="button is-link" value="Submit">
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}
