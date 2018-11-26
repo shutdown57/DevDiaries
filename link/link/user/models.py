@@ -37,6 +37,24 @@ class User(db.Model, UserMixin):
         """
         return self.token
 
+    def is_active(self):
+        """
+        To find user is active or not
+        """
+        return True
+
+    def is_anonymous(self):
+        """
+        The logged in user is not anonymous any more
+        """
+        return False
+
+    def is_authenticated(self):
+        """
+        User logged in
+        """
+        return True
+
     @property
     def password(self):
         """
@@ -146,16 +164,16 @@ class Info(db.Model):
     __tablename__ = 'info'
     id = db.Column(db.Integer, primary_key=True)
 
-    first_name = db.Column(db.String, nullable=True)
-    last_name = db.Column(db.String, nullable=True)
+    first_name = db.Column(db.String(20), nullable=True)
+    last_name = db.Column(db.String(30), nullable=True)
     birthday = db.Column(db.Integer, nullable=True)
     bio = db.Column(db.Text, nullable=True)
-    country = db.Column(db.String, nullable=True)
-    city = db.Column(db.String, nullable=True)
-    phone_number = db.Column(db.String, nullable=True)
-    job = db.Column(db.String, nullable=True)
+    country = db.Column(db.String(20), nullable=True)
+    city = db.Column(db.String(20), nullable=True)
+    phone_number = db.Column(db.String(15), nullable=True)
+    job = db.Column(db.String(50), nullable=True)
 
-    api_key = db.Column(db.String, nullable=True)
+    api_key = db.Column(db.String(256), nullable=True)
 
     created_at = db.Column(db.Integer, default=timestamp)
     updated_at = db.Column(db.Integer, default=timestamp, onupdate=timestamp)
@@ -193,15 +211,15 @@ class Permission:
     """
     user previlage class
     """
-    GUEST = '0x01'
-    USER = '0x02'
-    MOD = '0x04'
-    ADMIN = '0x80'
+    GUEST = 0x01
+    USER = 0x02
+    MOD = 0x04
+    ADMIN = 0x80
     TYPES = {
-        'guest': '0x01',
-        'user': '0x02',
-        'mod': '0x04',
-        'admin': '0x80'
+        'guest': 0x01,
+        'user': 0x02,
+        'mod': 0x04,
+        'admin': 0x80
     }
 
 
@@ -212,8 +230,8 @@ class Role(db.Model):
     __tablename__ = 'role'
     id = db.Column(db.Integer, primary_key=True)
 
-    name = db.Column(db.String, server_default='user')
-    permission = db.Column(db.Integer, server_default=Permission.USER)
+    name = db.Column(db.String(15), default='user')
+    permission = db.Column(db.Integer, default=Permission.USER)
 
     users = db.relationship('User', backref='role', lazy='dynamic')
 
@@ -250,4 +268,7 @@ class Anonymous(AnonymousUserMixin):
         return False
 
     def is_admin(self) -> bool:
+        return False
+
+    def is_authenticated(self) -> bool:
         return False
