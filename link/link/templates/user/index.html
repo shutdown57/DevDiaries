@@ -1,0 +1,25 @@
+{% extends "layouts/layout.default.html" %}
+
+{% block title %}Link-Home{% endblock %}
+
+{% block section %}
+<section class="section">
+    <div class="container">
+        <h1 class="title">Welcome {{ user.email }}</h1>
+        <p class="subtitle"><div>
+    Sit quas laboriosam ducimus deserunt consectetur molestias! Vel expedita accusantium id itaque inventore. Laudantium molestias fuga quos id iusto Reiciendis earum qui distinctio sequi praesentium fugiat. Odit commodi voluptatibus esse
+</div>
+</p>
+        <div class="columns is-desktop">
+            <div class="column is-10">
+            </div>
+            <aside class="menu">
+                <ul class="menu-list">
+                    <li><a class="button is-outlined" href="{{ url_for('bp_user.index') }}">Dashboard</a></li>
+                    <li><a class="button is-outlined" href="{{ url_for('bp_link.create') }}">Create</a></li>
+                </ul>
+            </aside>
+        </div>
+    </div>
+</section>
+{% endblock %}
