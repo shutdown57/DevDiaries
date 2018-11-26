@@ -3,28 +3,28 @@
 {% block title %}Registration{% endblock %}
 
 {% block section %}
-<section class="section">
+<section class="section" height="100%">
     <div class="container">
         <form action="{{ url_for('bp_auth.register_store') }}" method="POST">
 
             <div class="field">
                 <label class="label">Email</label>
                 <div class="control">
-                    <input class="input" type="text" placeholder="example@example.com">
+                    <input name="email" class="input" type="email" placeholder="example@example.com">
                 </div>
             </div>
 
             <div class="field">
                 <label class="label">Password</label>
                 <div class="control">
-                    <input class="input" type="password" placeholder="********">
+                    <input name="password" class="input" type="password" placeholder="********">
                 </div>
             </div>
 
             <div class="field">
                 <label class="label">Confirm Password</label>
                 <div class="control">
-                    <input class="input" type="password" placeholder="********">
+                    <input name="password_confirm" class="input" type="password" placeholder="********">
                 </div>
             </div>
 
