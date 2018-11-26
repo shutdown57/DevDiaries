@@ -17,3 +17,5 @@ docker-command.txt
 .vimrc
 src/app/__pycache__/
 src/.venv/
+__pycache__
+link/link/.env
