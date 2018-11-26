@@ -1,0 +1,69 @@
+{% extends "layouts/layout.default.html" %}
+
+{% block title %}Create-Link{% endblock %}
+
+{% block section %}
+<section class"section">
+    <div class="container">
+        <h2 class="title">Add link</h2>
+        <form id="link-create" method="POST" action="{{ url_for('bp_link.store') }}">
+            <div class="field">
+                <label class="label">Name</label>
+                <div class="control">
+                    <input name="name" class="input is-rounded" type="text" placeholder="Website name" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">URL</label>
+                <div class="control">
+                    <input name="url" class="input is-rounded" type="text" placeholder="www.duckduckgo.com" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Tags</label>
+                <div class="control">
+                    <input name="tags" class="input is-rounded" type="text" placeholder="search engine, weather, test" required>
+                </div>
+            </div>
+
+            <!-- <div class="field"> -->
+                <!-- <label class="label">Website image</label> -->
+                <!-- <div class="control is-grouped"> -->
+                    <!-- <button class="button is-link" id="make-web-img-create">Get website image</button> -->
+                    <!-- <input id="img-create" name="web_img"  class="input is-rounded" type="text" placeholder="www.duckduckgo.com" disabled> -->
+                <!-- </div> -->
+            <!-- </div> -->
+
+            <div class="field">
+                <label class="checkbox has-text-black">
+                    <input name="active" type="checkbox">
+                    Is url active or not
+                </label>
+            </div>
+
+            <div class="field">
+                <label class="label">Description</label>
+                <div class="control">
+                    <textarea name="description" class="textarea is-rounded" type="text" placeholder="Success textarea"></textarea>
+                </div>
+            </div>
+
+            <div class="field is-grouped">
+                <div class="control">
+                    <input class="button is-link" type="submit" value="Submit">
+                </div>
+            </div>
+        </form>
+        <br><br><br>
+    </div>
+</section>
+{% endblock %}
+
+{% block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sugar/1.4.1/sugar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="{{ url_for('static', filename='js/jquerymy.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/webimg.js') }}"></script>
+{% endblock %}
