@@ -1,7 +1,7 @@
-<nav class="navbar" role="navigation" aria-label="main navigation">
+<nav id="header" class="navbar has-background-info" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
       <a class="navbar-item" href="{{ url_for('index') }}">
-        <img src="{{ url_for('static', filename='img/link-433.png') }}" width="112" height="28">
+        <img src="{{ url_for('static', filename='img/link-1024.png') }}" width="32" height="28">
     </a>
 
     <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -13,9 +13,9 @@
 
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
-        <a class="navbar-item" href="{{ url_for('index') }}">Home</a>
+        <a class="navbar-item" href="{{ url_for('index') }}">Link</a>
 
-        <a class="navbar-item">Documentation</a>
+        <a class="navbar-item" href="{{ url_for('bp_link.index') }}">Explore</a>
 
         <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link">
@@ -24,31 +24,43 @@
 
             <div class="navbar-dropdown">
                 <a class="navbar-item" href="https://devdairies.ml">About</a>
-            <a class="navbar-item">
-                Jobs
+            <a class="navbar-item" href="https://gitlab.com/shutdown57/devdiaries.ml">
+                Project source
             </a>
-            <a class="navbar-item">
+            <a class="navbar-item" href="#">
                 Contact
             </a>
             <hr class="navbar-divider">
-            <a class="navbar-item">
+            <a class="navbar-item" href="#">
                 Report an issue
             </a>
             </div>
         </div>
         </div>
 
-    <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="buttons">
-          <a class="button is-primary">
-            <strong>Sign up</strong>
-          </a>
-          <a class="button is-light">
-            Log in
-          </a>
+        {% if not current_user.is_authenticated() %}
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+                <a class="button is-primary" href="{{ url_for('bp_auth.register_create') }}">
+                <strong>Sign up</strong>
+              </a>
+              <a class="button is-light" href="{{ url_for('bp_auth.login_store') }}">
+                Log in
+              </a>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+        {% elif current_user.is_authenticated() %}
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a class="button is-primary" href="{{ url_for('bp_user.index') }}">
+                        <strong>Dashboard</strong>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
   </div>
 </nav>
