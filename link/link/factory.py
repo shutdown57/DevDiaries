@@ -7,10 +7,16 @@ from user.models import Anonymous, User
 
 
 def create_app(config_name='default'):
+    """
+    Create application inctanse by given configs
+    :param config_name str: The config name to create app inctanse
+    :return: app
+    """
     app = Flask(__name__)
     app.config.from_object(configs[config_name])
 
     # Initializing
+    login_manager.init_app(app)
     login_manager.session_protection = 'strong'
     login_manager.anonymous_user = Anonymous
 
@@ -22,7 +28,15 @@ def create_app(config_name='default'):
 
     @login_manager.user_loader
     def load_user(token: str) -> User:
-        return User.query.filter_by(token=token).first()
+        """
+        Handler for login manager to load user by token
+        :param token str: Unique user token
+        return: User if find by token else Anonymous
+        """
+        user = User.query.filter_by(token=token).first()
+        if user:
+            return user
+        return Anonymous()
 
     from user import bp_user
     from link import bp_link
