@@ -1,11 +1,28 @@
 version: '2'
+
 services:
+
+  db:
+    image:
+      mariadb:latest
+    networks:
+      - default
+    volumes:
+      - dbdata:/var/lib/mariadb
+    restart: always
+    ports:
+      - "3306:8080"
+    environment:
+      - 'MYSQL_ROOT_PASSWORD=root'
+      - 'MYSQL_DATABASE=diaries'
+      - 'MYSQL_USER=admin'
+      - 'MYSQL_PASSWORD=root'
+
   nginx-proxy:
     image: jwilder/nginx-proxy
     container_name: nginx-proxy
     networks:
       - default
-      - link
     ports:
       - '8080:80'
     volumes:
@@ -13,46 +30,36 @@ services:
       - '/usr/share/nginx/html'
       - '/var/run/docker.sock:/tmp/docker.sock:ro'
 
-  # main:
-    # build: ./src
-    # depends_on:
-      # - nginx-proxy
-    # ports:
-      # - "8181:5000"
-    # networks:
-      # - default
-
-  db:
-    image:
-      mariadb:latest
-    volumes:
-      - dbdata:/var/lib/mariadb
+  main:
+    build: ./src
     restart: always
+    depends_on:
+      - nginx-proxy
     ports:
-      - "3306:3306"
-    environment:
-      - 'MYSQL_ROOT_PASSWORD=root'
-      - 'MYSQL_DATABASE=diaries'
-      - 'MYSQL_USER=admin'
-      - 'MYSQL_PASSWORD=root'
+      - "8081:5000"
+    networks:
+      - default
 
   link:
     build: ./link
+    restart: always
+    links:
+      - db
     depends_on:
       - nginx-proxy
       - db
     ports:
-      - "8182:5000"
+      - "8082:5000"
     networks:
-      - link
+      - default
 
 networks:
   default:
     external:
       name: nginx-net
-  link:
-    external:
-      name: nginx-link
+  # link:
+    # external:
+      # name: nginx-link
 
 volumes:
   dbdata:
