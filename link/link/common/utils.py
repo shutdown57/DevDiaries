@@ -7,6 +7,12 @@ from flask_login import current_user
 from flask.sessions import SecureCookieSessionInterface
 
 # from src.user.models import Permission
+ALLOWED_EXTENSIONS = set(['jpg'])
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 def timestamp() -> int:
@@ -25,7 +31,7 @@ class SessionInterface(SecureCookieSessionInterface):
         return super(SessionInterface, self).save_session(*args, **kwargs)
 
 
-def response(message: str='', data: dict={}, status_code: int=200, headers: dict={}) -> tuple:
+def response(message: str='', data: dict={}, status_code: int=200, headers: dict={})-> tuple:
     """
     Handle json response to cleaner code style
     :param message: <str> if need sent specific messege
