@@ -9,9 +9,9 @@ RUN pip install -r requirements.txt
 RUN pip install gunicorn
 
 COPY ./link link
-COPY link/app.py ./
+COPY link/manage.py ./link
 
-ENV FLASK_APP app.py
+ENV FLASK_APP manage.py
 
 RUN chown -R link:link ./
 USER link
