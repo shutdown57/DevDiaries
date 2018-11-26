@@ -14,4 +14,4 @@ from user import bp_user
 @bp_user.route('/', methods=['GET'])
 @login_required
 def index():
-    return render_template('/user', user=current_user)
+    return render_template('user/index.html', user=current_user)
