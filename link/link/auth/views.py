@@ -60,5 +60,7 @@ def login_store():
     if not user and not user.verify_password(request.form['password']):
         flash('email or password is wrong', 'error')
         return redirect(url_for('bp_auth.login_create'))
-    login_user(user, request.form['remember'])
+    remember = request.form['remember'] if 'remember' in request.form.keys() \
+        else False
+    login_user(user, remember)
     return redirect(url_for('bp_user.index'))
