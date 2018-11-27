@@ -95,6 +95,7 @@ class User(db.Model, UserMixin):
         else:
             user = cls(email=email)
             user.password = password_
+            user.generate_token()
 
             user.role = Role.query.filter_by(name='user').first()
             user.info = Info()
@@ -253,8 +254,7 @@ class Role(db.Model):
         Stringify role object to print in console
         """
         return '<ROLE ID={id} NAME={name} PERMISSION={permission}>'.format(
-            id=self.id, name=self.name, permission=self.permission
-        )
+            id=self.id, name=self.name, permission=self.permission)
 
 
 class Anonymous(AnonymousUserMixin):
