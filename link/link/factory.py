@@ -18,6 +18,7 @@ def create_app(config_name='default'):
     # Initializing
     login_manager.init_app(app)
     login_manager.session_protection = 'strong'
+    login_manager.login_view = 'bp_auth.login_create'
     login_manager.anonymous_user = Anonymous
 
     app.session_interface = SessionInterface()
