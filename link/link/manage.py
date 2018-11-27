@@ -3,6 +3,7 @@
 
 import os
 import subprocess
+from dotenv import load_dotenv
 from flask_migrate import Migrate, MigrateCommand, upgrade
 from flask_script import Manager, Shell, Command, Option
 
@@ -36,14 +37,10 @@ def drop_db():
     print("DROP TABLES")
     db.drop_all()
 
+@manager.command
+def set_env():
+    load_dotenv()
+
 
 if __name__ == '__main__':
-    try:
-        with open('.env', 'r') as fenv:
-            for link in fenv.readline:
-                key, value = line.split('=')
-                os.environ[key] = value
-    except Exception as e:
-        print("File is missing or variable not matched")
-        raise
     manager.run()
