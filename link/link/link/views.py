@@ -6,7 +6,7 @@ from concurrent.futures import ThreadPoolExecutor
 from flask import render_template, request, flash, redirect, url_for
 from urllib.parse import urlparse
 from werkzeug.utils import secure_filename
-from flask_login import current_user
+from flask_login import current_user, login_required
 
 from common.extensions import db
 from common.utils import allowed_file
@@ -25,11 +25,13 @@ def index(pages=None):
 
 
 @bp_link.route('/create', methods=['GET'])
+@login_required
 def create():
     return render_template('link/create.html')
 
 
 @bp_link.route('/store', methods=['POST'])
+@login_required
 def store():
     data = request.form.copy()
     # TODO better validation
@@ -37,7 +39,7 @@ def store():
             'tags' in data.keys() and data['tags']:
         link = Link.query.filter_by(url=data['url']).first()
         if not link:
-            resp = make_img(data['url'])
+            # resp = make_img(data['url'], data['name'], )
             #  img_url = get_img(resp['image_url'], data['name'])
             url_info = urlparse(data['url'])
             link = Link(
