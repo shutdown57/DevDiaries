@@ -9,3 +9,4 @@ gunicorn==19.9.0
 Jinja2==2.10
 mysql-connector
 requests
+python-dotenv
