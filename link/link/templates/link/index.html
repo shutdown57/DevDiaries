@@ -10,8 +10,50 @@
     </h1>
     {% if links %}
         <p class="subtitle">
-            {% for link in links %}
-                {{ link.name }}
+            {% for link in links.items %}
+                <article class="media">
+                  <figure class="media-left">
+                    <p class="image is-64x64">
+                        <img src="{{ link.website_image }}">
+                    </p>
+                  </figure>
+                  <div class="media-content">
+                    <div class="content">
+                      <p class="has-text-black">
+                          <strong>{{ link.name }}</strong> <small>{{ link.created_at}}</small>
+                        <br>
+                        {{ link.description }}
+                      </p>
+                    </div>
+                    <nav class="level is-mobile">
+                      <div class="level-left">
+                        <!-- <a class="level-item"> -->
+                          <!-- <span class="icon is-small"><i class="fas fa-reply"></i></span> -->
+                        <!-- </a> -->
+                        <!-- <a class="level-item"> -->
+                          <!-- <span class="icon is-small"><i class="fas fa-retweet"></i></span> -->
+                        <!-- </a> -->
+                        <a class="level-item" href="{{ url_for('bp_link.show', id=link.id) }}">
+                          <span class="icon is-medium"><i class="fas fa-arrow-circle-right "></i></span>
+                        </a>
+                        <!-- <a class="level-item"> -->
+                          <!-- <span class="icon is-small"><i class="fas fa-heart"></i></span> -->
+                        <!-- </a> -->
+                      </div>
+                      <div class="level-right tags">
+                          {% for tag in link.tags %}
+                          <!-- TODO make get link by tag route -->
+                            <a class="level-item has-text-white" href="#">
+                                <span class="tag is-small is-rounded is-link">{{ tag.name }}</span>
+                            </a>
+                          {% endfor %}
+                      </div>
+                    </nav>
+                  </div>
+                  <!-- <div class="media-right"> -->
+                    <!-- <button class="delete"></button> -->
+                  <!-- </div> -->
+                </article>
             {% endfor %}
         </p>
     {% else %}
