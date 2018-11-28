@@ -15,8 +15,7 @@ class Config:
 
 class DevelopConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + \
-        os.path.join(base_uri, 'db-dev.sqlite')
+    SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://admin:root@db/diaries'
 
 
 class ProductConfig(Config):
