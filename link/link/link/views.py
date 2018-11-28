@@ -46,7 +46,7 @@ def store():
                 user_id=current_user.id,
                 url=data['url'],
                 description=data['description'],
-                name=url_info.netloc)
+                name=data['name'])
             for tag_name in data['tags'].split(','):
                 old_tag = Tag.query.filter_by(name=tag_name).first()
                 if old_tag:
@@ -56,7 +56,7 @@ def store():
                 tag = Tag(name=tag_name)
                 db.session.add(tag)
                 link.tags.append(tag)
-            executor.submit(make_img, data['url'], url_info.netloc, link.id)
+            executor.submit(make_img, data['url'], data['name'], link.id)
             db.session.add(link)
             db.session.commit()
             return redirect(url_for('bp_link.show', id=link.id))
@@ -70,6 +70,15 @@ def store():
 def call_back():
     print("They call me!", request.form)
     return '', 200
+
+
+@bp_link.route('/<int:id>', methods=['GET'])
+def show(id):
+    link = Link.query.filter_by(id=id).first()
+    if not link:
+        flash("Link does not exist", "error")
+        return redirect('bp_link.index')
+    return render_template('/link/show.html', link=link)
 
 
 def make_img(p2i_url: str, name: str, link_id: int) -> None:
@@ -147,12 +156,3 @@ def write_img(img_url, img_name):
         with open(Config.UPLOAD_FOLDER + '/' + img_name, 'wb') as image:
             image.write(img_file)
         return Config.UPLOAD_FOLDER + '/' + img_name
-
-
-@bp_link.route('/<int:id>', methods=['GET'])
-def show(id):
-    link = Link.query.filter_by(id=id).first()
-    if not link:
-        flash("Link does not exist", "error")
-        return redirect('bp_link.index')
-    return render_template('/link/show.html', link=link)
