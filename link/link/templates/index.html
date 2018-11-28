@@ -12,44 +12,45 @@
              Project <strong>Link</strong> is under development.
         </p>
         <p class="subtitle">The goal of project is reference of useful and official websites (scam, junk and ... report)</p>
-        <table class="table table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-            <thead>
-                <tr>
-                    <th><abbr title="Identify">ID</abbr></th>
-                    <th>Name</th>
-                    <th>URL</th>
-                    <th>Description</th>
-                    <th>Tag('s)</th>
-                </tr>
-            </thead>
-            <tfoot>
-                <tr>
-                    <th><abbr title="Identify">ID</abbr></th>
-                    <th>Name</th>
-                    <th>URL</th>
-                    <th>Description</th>
-                    <th>Tag('s)</th>
-                </tr>
-            </tfoot>
-            <tbody>
-                <tr>
-                    <th><strong>1</strong></th>
-                    <td><strong>Google</strong></td>
-                    <td><a href="https://www.google.com">www.google.com</a></td>
-                    <td>Search engine</td>
-                    <td class="tags"><span class="tag is-small is-rounded is-link"><a class="has-text-white" href="#">search engine</a></span><span class="tag is-small is-rounded is-link"><a class="has-text-white" href="#">mail</a></span><span class="tag is-small is-rounded is-link"><a class="has-text-white" href="#">devil</a></span></td>
-                </tr>
-                <tr>
-                    <th><strong>2</strong></th>
-                    <td><strong>yahoo</strong></td>
-                    <td><a href="https://www.yahoo.com">www.yahoo.com</a></td>
-                    <td>a company has some service like search engine, mail, news, weather and ...</td>
-                    <td class"tags"><span class="tag is-small is-rounded is-link"><a class="has-text-white" href="#">search engine</a></span><span class="tag is-small is-rounded is-link"><a class="has-text-white" href="#">mail</a></span><span class="tag is-small is-rounded is-link"><a class="has-text-white" href="#">news</a></span><span class="tag is-small is-rounded is-link"><a class="has-text-white" href="#">weather</a></span></td>
-                </tr>
-                <!-- {% for link in links %} -->
-                <!-- {% endfor %} -->
-            </tbody>
-        </table>
+        {% if links %}
+            <table class="table table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                <thead>
+                    <tr>
+                        <th><abbr title="Identify">ID</abbr></th>
+                        <th>Name</th>
+                        <th>URL</th>
+                        <th>Description</th>
+                        <th>Tag('s)</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th><abbr title="Identify">ID</abbr></th>
+                        <th>Name</th>
+                        <th>URL</th>
+                        <th>Description</th>
+                        <th>Tag('s)</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for link in links %}
+                        <tr>
+                            <th><strong>{{ link.id }}</strong></th>
+                            <td><strong>{{ link.name }}</strong></td>
+                            <td><a href="{{ link.url }}">{{ link.url }}</a></td>
+                            <td>{{ link.description }}</td>
+                            <td class="tags">
+                                {% for tag in link.tags %}
+                                    <span class="tag is-small is-rounded is-link">
+                                        <a class="has-text-white" href="#">{{ tag.name }}</a>
+                                    </span>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
     </div>
 </section>
 {% endblock %}
