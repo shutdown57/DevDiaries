@@ -20,7 +20,7 @@ class DevelopConfig(Config):
 
 
 class ProductConfig(Config):
-    DEBUG = True
+    DEBUG = False
     TESTING = False
     PREFERRED_URL_SCHEME = 'https'
     SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://admin:root@db/diaries'
