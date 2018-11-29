@@ -4,6 +4,7 @@ from config import configs
 from common.extensions import login_manager
 from common.utils import SessionInterface
 from user.models import Anonymous, User
+from link.models import Link
 
 
 def create_app(config_name='default'):
@@ -23,16 +24,12 @@ def create_app(config_name='default'):
 
     app.session_interface = SessionInterface()
 
-    @app.route('/', methods=['GET'])
-    def index():
-        return render_template('index.html')
-
     @login_manager.user_loader
     def load_user(token: str) -> User:
         """
         Handler for login manager to load user by token
         :param token str: Unique user token
-        return: User if find by token else Anonymous
+        :return: User if find by token else Anonymous
         """
         user = User.query.filter_by(token=token).first()
         if user:
@@ -42,8 +39,10 @@ def create_app(config_name='default'):
     from user import bp_user
     from link import bp_link
     from auth import bp_auth
+    from main import bp_main
     from api import bp_api
 
+    app.register_blueprint(bp_main)
     app.register_blueprint(bp_auth, url_prefix='/auth')
     app.register_blueprint(bp_user, url_prefix='/users')
     app.register_blueprint(bp_link, url_prefix='/links')
