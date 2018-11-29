@@ -1,6 +1,6 @@
 <nav id="header" class="navbar has-background-info" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-      <a class="navbar-item" href="{{ url_for('index') }}">
+      <a class="navbar-item" href="{{ url_for('bp_main.index') }}">
         <img src="{{ url_for('static', filename='img/text.png') }}" width="32" height="28">
     </a>
 
@@ -13,7 +13,7 @@
 
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
-        <a class="navbar-item" href="{{ url_for('index') }}">Link</a>
+        <a class="navbar-item" href="{{ url_for('bp_main.index') }}">Link</a>
 
         <a class="navbar-item" href="{{ url_for('bp_link.index') }}">Explore</a>
 
@@ -23,11 +23,11 @@
             </a>
 
             <div class="navbar-dropdown">
-                <a class="navbar-item" href="https://devdairies.ml">About</a>
+                <a class="navbar-item" href="{{ url_for('bp_main.about') }}">About</a>
             <a class="navbar-item" href="https://gitlab.com/shutdown57/devdiaries.ml">
                 Project source
             </a>
-            <a class="navbar-item" href="#">
+            <a class="navbar-item" href="{{ url_for('bp_main.contact') }}">
                 Contact
             </a>
             <hr class="navbar-divider">
