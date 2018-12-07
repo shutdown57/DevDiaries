@@ -9,8 +9,12 @@ from link.models import Link, Tag
 
 
 @bp_link.route('/', methods=['GET'])
-def index(pages=None):
-    links = Link.query.paginate()
+def index():
+    per_page = 10
+    page = request.args.get('page', 1, type=int)
+    links = Link.query.order_by(
+        Link.created_at.desc()
+    ).paginate(page, per_page=per_page, error_out=False)
     return render_template('link/index.html', links=links)
 
 
