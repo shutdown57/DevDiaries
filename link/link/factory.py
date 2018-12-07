@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 
 from config import configs
+from common.moment import Moment
 from common.extensions import login_manager
 from common.utils import SessionInterface
 from user.models import Anonymous, User
@@ -15,6 +16,7 @@ def create_app(config_name='default'):
     """
     app = Flask(__name__)
     app.config.from_object(configs[config_name])
+    app.jinja_env.globals['Moment'] = Moment
 
     # Initializing
     login_manager.init_app(app)
