@@ -12,7 +12,7 @@ API_CALL_STATUS_PROCESSING = 'processing'
 API_CALL_STATUS_FIHISHED = 'finished'
 
 
-def make_img(p2i_url: str, link_id: int) -> None:
+def make_img(p2i_url: str, link_id: str) -> None:
     """
     Make image screenshut
     :param p2i_url str: Website url to make screenshut
