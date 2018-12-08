@@ -55,6 +55,7 @@ def login_store():
         return redirect(url_for('index'))
     if not request.form and 'email' in request.form.keys() and \
             'password' in request.form.keys():
+        flash('email and password are required', 'error')
         return redirect(url_for('bp_auth.login_create'))
     user = User.query.filter_by(email=request.form['email']).first()
     if not user and not user.verify_password(request.form['password']):
