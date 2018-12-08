@@ -62,6 +62,8 @@ def store():
 def call_back():
     if 'status' in request.form and request.form['status'] == 'finished':
         link_id = request.args.get('link_id', '')
+        if not link_id:
+            return '', 200
         link = Link.query.filter_by(id=link_id).first()
         link.website_image = fetch.write_img(request.form['image_url'])
         db.session.add(link)
