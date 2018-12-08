@@ -19,3 +19,4 @@ src/app/__pycache__/
 src/.venv/
 __pycache__
 link/link/.env
+vhost.d/
