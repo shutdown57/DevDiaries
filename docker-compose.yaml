@@ -28,14 +28,14 @@ services:
     build: ./src
     depends_on:
       - nginx-proxy
-    ports:
-      - "8181:5000"
+    # ports:
+      # - "8181:5000"
     networks:
       - default
     environment:
       - 'LETSENCRYPT_EMAIL=shutdown57@riseup.net'
-      - 'LETSENCRYPT_HOST=devdiaries.ml'
-      - 'VIRTUAL_HOST=devdiaries.ml'
+      - 'LETSENCRYPT_HOST=devdiaries.xyz'
+      - 'VIRTUAL_HOST=devdiaries.xyz'
 
   db:
     image:
@@ -43,8 +43,8 @@ services:
     volumes:
       - dbdata:/var/lib/mariadb
     restart: always
-    ports:
-      - "3306:3306"
+    # ports:
+      # - "3306:3306"
     environment:
       - 'MYSQL_ROOT_PASSWORD=root'
       - 'MYSQL_DATABASE=diaries'
@@ -56,14 +56,14 @@ services:
     depends_on:
       - nginx-proxy
       - db
-    ports:
-      - "8182:5000"
+    # ports:
+      # - "8182:5000"
     networks:
       - link
     environment:
       - 'LETSENCRYPT_EMAIL=shutdown57@riseup.net'
-      - 'LETSENCRYPT_HOST=link.devdiaries.ml'
-      - 'VIRTUAL_HOST=link.devdiaries.ml'
+      - 'LETSENCRYPT_HOST=link.devdiaries.xyz'
+      - 'VIRTUAL_HOST=link.devdiaries.xyz'
 
 networks:
   default:
