@@ -6,7 +6,7 @@ from common.utils import allowed_file
 from config import Config
 
 
-CALLBACK = 'http://localhost:5000/links/call_back?image_id='
+CALLBACK = 'https://link.devdiaries.xyz/links/call_back?image_id='
 API_CALL_STATUS_ERROR = 'error'
 API_CALL_STATUS_PROCESSING = 'processing'
 API_CALL_STATUS_FIHISHED = 'finished'
