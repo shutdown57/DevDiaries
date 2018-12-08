@@ -1,11 +1,12 @@
 version: '2'
+
 services:
+
   nginx-proxy:
     image: jwilder/nginx-proxy
     container_name: nginx-proxy
     networks:
       - default
-      - link
     ports:
       - '80:80'
       - '443:443'
@@ -31,8 +32,6 @@ services:
       - db
     depends_on:
       - nginx-proxy
-    # ports:
-      # - "8181:5000"
     networks:
       - default
     environment:
@@ -45,12 +44,9 @@ services:
       mariadb:latest
     networks:
       - default
-      - link
     volumes:
       - dbdata:/var/lib/mariadb
     restart: always
-    # ports:
-      # - "3306:3306"
     environment:
       - 'MYSQL_ROOT_PASSWORD=root'
       - 'MYSQL_DATABASE=diaries'
@@ -65,10 +61,8 @@ services:
     depends_on:
       - nginx-proxy
       - db
-    # ports:
-      # - "8182:5000"
     networks:
-      - link
+      - default
     environment:
       - 'LETSENCRYPT_EMAIL=shutdown57@riseup.net'
       - 'LETSENCRYPT_HOST=link.devdiaries.xyz'
@@ -78,9 +72,6 @@ networks:
   default:
     external:
       name: nginx-net
-  link:
-    external:
-      name: nginx-link
 
 volumes:
   dbdata:
