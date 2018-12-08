@@ -128,7 +128,7 @@ class User(db.Model, UserMixin):
             'role_name': self.role.name,
             'info': self.info.to_json(),
             '_links': {
-                'token': url_for('bp_user.new_token', _external=True),
+                'token': url_for('bp_api.new_token', _external=True),
                 'user': url_for('bp_user.get_user', id=self.id, _external=True)
             }
         }
