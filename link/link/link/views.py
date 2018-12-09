@@ -50,7 +50,7 @@ def store():
                 link.tags.append(tag)
             db.session.add(link)
             db.session.commit()
-            fetch.make_img(data['url'], link.id)
+            fetch.make_img(data['url'], str(link.id))
             return redirect(url_for('bp_link.show', id=link.id))
         flash("Data exist", "error")
         return redirect(url_for('bp_link.show', id=link.id))
