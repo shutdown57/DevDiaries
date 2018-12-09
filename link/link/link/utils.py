@@ -21,7 +21,7 @@ def make_img(p2i_url: str, link_id: str) -> None:
     """
     p2i = {
         'p2i_url': p2i_url,
-        'p2i_key': os.environ.get('P2I_KEY', ''),
+        'p2i_key': os.environ.get('P2I_KEY', '508e9ed579f33411'),
         'p2i_device': 6,
         'p2i_fullpage': 1,
         'p2i_imageformat': 'jpg',
