@@ -17,10 +17,10 @@ RUN chown -R link:link ./
 USER link
 
 # CMD sh link/presetup.sh
-CMD python link/manage.py db init
-CMD python link/manage.py init_db
-CMD python link/manage.py db upgrade
-CMD python link/manage.py set_env
+# CMD python link/manage.py db init
+# CMD python link/manage.py init_db
+# CMD python link/manage.py db upgrade
+# CMD python link/manage.py set_env
 
 EXPOSE 5000
 CMD python link/server.py
