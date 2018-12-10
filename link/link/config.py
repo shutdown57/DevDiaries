@@ -22,7 +22,7 @@ class ProductConfig(Config):
     DEBUG = False
     TESTING = False
     PREFERRED_URL_SCHEME = 'https'
-    SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://admin:root@db/diaries'
+    SQLALCHEMY_DATABASE_URI = 'mysql://admin:root@db/diaries'
     # TODO Configuration MariaDB for Production
 
 
