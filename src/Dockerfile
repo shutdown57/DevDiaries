@@ -16,5 +16,5 @@ ENV FLASK_APP app.py
 RUN chown -R app:app ./
 USER app
 
-EXPOSE 5000
+EXPOSE 5001
 CMD python app/server.py
