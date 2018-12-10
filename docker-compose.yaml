@@ -28,6 +28,8 @@ services:
   main:
     build: ./src
     restart: always
+    ports:
+      - 5001
     links:
       - db
     depends_on:
@@ -44,6 +46,8 @@ services:
       mariadb:latest
     networks:
       - default
+    ports:
+      - 3306
     volumes:
       - dbdata:/var/lib/mariadb
     restart: always
@@ -56,6 +60,8 @@ services:
   link:
     build: ./link
     restart: always
+    ports:
+      - 5000
     links:
       - db
     depends_on:
