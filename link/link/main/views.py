@@ -6,8 +6,7 @@ from link.models import Link
 
 @bp_main.route('/', methods=['GET'])
 def index():
-    #  page = request.args.get('page', 1, type=int)
-    page = 1
+    page = request.args.get('page', 1, type=int)
     links = Link.query.order_by(Link.created_at.desc()).paginate(page, per_page=10, error_out=False)
     return render_template('index.html', links=links)
 
