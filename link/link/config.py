@@ -23,7 +23,8 @@ class ProductConfig(Config):
     TESTING = False
     PREFERRED_URL_SCHEME = 'https'
     SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://admin:root@db/diaries'
-    # TODO Configuration MariaDB for Production
+    #  SQLALCHEMY_DATABASE_URI = 'sqlite:///' + \
+        #  os.path.join(base_uri, 'db-test.sqlite')
 
 
 class TestConfig(Config):
