@@ -5,6 +5,8 @@ from link.models import Link, Tag
 
 
 class LinkValidation:
+    #  URL = r'(?:(?:.*?\.)(?P<name1>.*?)\.)|(?://(?P<name2>.*?)\.)'
+    SSL = r'^https'
     NAME = r'([a-zA-Z0-9]){3,}'
     DESCRIPTION = r'(.*)'
     ACTIVE = r'([1-2]){1}'
@@ -14,15 +16,27 @@ class LinkValidation:
     def form(cls, data):
         if not data:
             return False
+        if not cls.url(data['url']):
+            return False
         if not cls.name(data['name']):
             return False
         if not cls.active(data['active']):
             return False
         if not cls.description(data['description']):
             return False
-        if not cls.web_img(data['web_img']):
+        if not 'tags' in data.keys():
             return False
         return True
+
+    @classmethod
+    def url(cls, url_):
+        if urlparse(url_):
+            return True
+        return False
+
+    @classmethod
+    def ssl(url_):
+        return bool(re.match(cls.SSL, url_))
 
     @classmethod
     def name(cls, name_):
