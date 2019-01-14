@@ -20,3 +20,4 @@ src/.venv/
 __pycache__
 link/link/.env
 vhost.d/
+.vscode/
