@@ -28,9 +28,7 @@ def create():
 @login_required
 def store():
     data = request.form.copy()
-    # TODO better validation
-    if data and 'url' in data.keys() and 'description' in data.keys() and \
-            'tags' in data.keys() and data['tags']:
+    if all(['name', 'url', 'tags', 'description']) not in data.keys():
         link = Link.query.filter_by(url=data['url']).first()
         if not link:
             url_info = urlparse(data['url'])
@@ -77,4 +75,10 @@ def show(id):
     if not link:
         flash("Link does not exist", "error")
         return redirect('bp_link.index')
+    #  if not link.has_image:
+        #  link.p2i_address = fetch.make_img(link.url, str(link.id))
+        #  link.has_image = True
+        #  fetch.write_img(link.p2i_address)
+        #  db.session.add(link)
+        #  db.session.commit()
     return render_template('/link/show.html', link=link)
