@@ -26,10 +26,10 @@ manager.add_command("db", MigrateCommand)
 
 @manager.command
 def init_db():
-    print("INITIALIZING DATABASE")
-    upgrade()
+    print("#" * 5, "INITIALIZING DATABASE", "#" * 5)
     db.create_all()
-    Role.init_roles()
+    if not Role.query.filter_by(id=4).first():
+        Role.init_roles()
 
 
 @manager.command
