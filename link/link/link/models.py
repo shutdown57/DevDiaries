@@ -36,6 +36,9 @@ class Link(db.Model):
     url = db.Column(db.Text, nullable=False)
     active = db.Column(db.Boolean, default=True)
     website_image = db.Column(db.String(256))
+    p2i_address = db.Column(db.String(256))
+    has_image = db.Column(db.Boolean, default=False)
+    ssl = db.Column(db.Boolean, default=False)
     description = db.Column(db.Text, nullable=False)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
