@@ -19,6 +19,7 @@ def create_app(config_name='default'):
     app.jinja_env.globals['Moment'] = Moment
 
     # Initializing
+    #  db.init_app(app)
     login_manager.init_app(app)
     login_manager.session_protection = 'strong'
     login_manager.login_view = 'bp_auth.login_create'
