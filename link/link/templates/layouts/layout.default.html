@@ -36,6 +36,7 @@
 
     <script type=text/javascript>
         $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+        console.log($SCRIPT_ROOT);
     </script>
     {% block scriptGlobal %}
         {% include "layouts/layout.script.html" %}
