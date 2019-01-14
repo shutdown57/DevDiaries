@@ -21,7 +21,7 @@ def make_img(p2i_url: str, link_id: str) -> None:
     """
     p2i = {
         'p2i_url': p2i_url,
-        'p2i_key': os.environ.get('P2I_KEY', '508e9ed579f33411'),
+        'p2i_key': os.environ.get('P2I_KEY', 'none'),
         'p2i_device': 6,
         'p2i_fullpage': 1,
         'p2i_imageformat': 'jpg',
@@ -31,7 +31,7 @@ def make_img(p2i_url: str, link_id: str) -> None:
     }
 
     request_url = 'http://api.page2images.com/restfullink'
-    request_img(request_url, p2i)
+    return request_img(request_url, p2i)
 
 
 def request_img(request_url: str, params: dict) -> dict:
@@ -42,10 +42,11 @@ def request_img(request_url: str, params: dict) -> dict:
     :return: Response of p2i api
     """
     try:
-        requests.get(request_url, params=params)
+        result = requests.get(request_url, params=params)
+        return result
     except Exception as e:
         print(f"Error in [get image url]: {e}")
-        raise # TODO enter exception class
+        return None
 
 
 def write_img(img_url: str) -> str:
