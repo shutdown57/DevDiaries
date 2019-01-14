@@ -6,15 +6,16 @@ WORKDIR /home/link
 
 COPY link/requirements.txt requirements.txt
 RUN pip install -r requirements.txt
-RUN pip install gunicorn
 
-COPY ./link link
-COPY link/manage.py ./link
+COPY ./link .
+COPY link/manage.py .
 
 ENV FLASK_APP manage.py
 
-RUN chown -R link:link ./
+RUN chown -R link:link .
+RUN chmod +x ./presetup.sh
 USER link
 
 EXPOSE 5000
-CMD python link/server.py
+CMD ./presetup.sh
+# CMD gunicorn wsgi -w 1 -b 0.0.0.0:5000 --reload
