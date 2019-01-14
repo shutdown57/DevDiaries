@@ -11,7 +11,7 @@ services:
       - dbdata:/var/lib/mariadb
     restart: always
     ports:
-      - "3306:8080"
+      - "3306:3306"
     environment:
       - 'MYSQL_ROOT_PASSWORD=root'
       - 'MYSQL_DATABASE=diaries'
