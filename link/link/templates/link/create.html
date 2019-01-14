@@ -28,14 +28,6 @@
                 </div>
             </div>
 
-            <!-- <div class="field"> -->
-                <!-- <label class="label">Website image</label> -->
-                <!-- <div class="control is-grouped"> -->
-                    <!-- <button class="button is-link" id="make-web-img-create">Get website image</button> -->
-                    <!-- <input id="img-create" name="web_img"  class="input is-rounded" type="text" placeholder="www.duckduckgo.com" disabled> -->
-                <!-- </div> -->
-            <!-- </div> -->
-
             <div class="field">
                 <label class="checkbox has-text-black">
                     <input name="active" type="checkbox">
@@ -61,7 +53,7 @@
 </section>
 {% endblock %}
 
-{% block script %}
+{% block scriptLocal %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sugar/1.4.1/sugar.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="{{ url_for('static', filename='js/jquerymy.min.js') }}"></script>
