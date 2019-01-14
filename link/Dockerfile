@@ -18,4 +18,3 @@ USER link
 
 EXPOSE 5000
 CMD ./presetup.sh
-# CMD gunicorn wsgi -w 1 -b 0.0.0.0:5000 --reload
