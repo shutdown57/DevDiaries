@@ -10,8 +10,8 @@ from link.models import Link
 
 def create_app(config_name='default'):
     """
-    Create application inctanse by given configs
-    :param config_name str: The config name to create app inctanse
+    Create application instance by given configs
+    :param config_name str: The config name to create app instance
     :return: app
     """
     app = Flask(__name__)
@@ -19,13 +19,12 @@ def create_app(config_name='default'):
     app.jinja_env.globals['Moment'] = Moment
 
     # Initializing
-    #  db.init_app(app)
     login_manager.init_app(app)
     login_manager.session_protection = 'strong'
     login_manager.login_view = 'bp_auth.login_create'
     login_manager.anonymous_user = Anonymous
 
-    app.session_interface = SessionInterface()
+    #  app.session_interface = SessionInterface()
 
     @login_manager.user_loader
     def load_user(token: str) -> User:
