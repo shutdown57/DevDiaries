@@ -6,9 +6,30 @@
 <section class="section">
     <div class="container">
         <div class="columns">
+            <div class="column is-8">
+                <h1>{{ link.name }}</h1>
+                <div>
+                    <small>{{ Moment(link.created_at).calendar() }}</small>&nbspc;
+                    <small>{{ Moment(link.updated_at).calendar() }}</small>
+                </div>
+                <div>{{ link.description }}</div>
+                <hr>
+                {% if link.tags %}
+                <div class="level-right tags">
+                    {% for tag in link.tags %}
+                    <a class="level-item has-text-white" href="#">
+                        <span class="tag is-small is-rounded is-link">{{ tag.name }}</span>
+                    </a>
+                    {% endfor %}
+                </div>
+                <br>
+                {% endif %}
+            </div>
+            {% if link.website_image %}
             <div class="column is-4">
                 <img src="{{ link.website_image }}" alt="{{ link.name }}">
             </div>
+            {% endif %}
         </div>
     </div>
 </section>
