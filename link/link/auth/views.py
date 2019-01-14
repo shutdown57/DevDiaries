@@ -58,7 +58,7 @@ def login_store():
         flash('email and password are required', 'error')
         return redirect(url_for('bp_auth.login_create'))
     user = User.query.filter_by(email=request.form['email']).first()
-    if not user and not user.verify_password(request.form['password']):
+    if not user or not user.verify_password(request.form['password']):
         flash('email or password is wrong', 'error')
         return redirect(url_for('bp_auth.login_create'))
     if 'remember' in request.form and request.form['remember']:
